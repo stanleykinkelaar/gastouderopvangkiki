@@ -52,9 +52,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+    <!-- Local Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     
     <!-- CSS -->
     @vite(['resources/css/app.css'])
@@ -134,24 +133,65 @@
     }
     </script>
     
-    <!-- Google Analytics -->
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" style="position:fixed;bottom:0;left:0;right:0;background:#333;color:white;padding:1rem;z-index:1000;display:none;">
+        <div style="max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+            <p style="margin:0;flex:1;min-width:300px;">
+                Deze website gebruikt cookies om de gebruikerservaring te verbeteren. Door verder te gaan, gaat u akkoord met het gebruik van cookies.
+                <a href="#" style="color:#4A90E2;text-decoration:underline;">Meer informatie</a>
+            </p>
+            <div style="display:flex;gap:0.5rem;">
+                <button onclick="acceptCookies()" style="background:#4A90E2;color:white;border:none;padding:0.5rem 1rem;border-radius:4px;cursor:pointer;">Accepteren</button>
+                <button onclick="declineCookies()" style="background:#666;color:white;border:none;padding:0.5rem 1rem;border-radius:4px;cursor:pointer;">Weigeren</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Google Analytics (only loaded with consent) -->
     @if(config('app.env') === 'production' && config('services.google_analytics.tracking_id'))
-    <!-- Google Tag Manager -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google_analytics.tracking_id') }}"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '{{ config('services.google_analytics.tracking_id') }}', {
-            page_title: '{{ $title ?? "Gastouderopvang Kiki" }}',
-            custom_map: {
-                'dimension1': 'page_type'
-            }
-        });
+        function loadGoogleAnalytics() {
+            // Load Google Analytics
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id={{ config('services.google_analytics.tracking_id') }}';
+            document.head.appendChild(script);
+            
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '{{ config('services.google_analytics.tracking_id') }}', {
+                page_title: '{{ $title ?? "Gastouderopvang Kiki" }}',
+                anonymize_ip: true,
+                cookie_flags: 'SameSite=Strict;Secure',
+                custom_map: {
+                    'dimension1': 'page_type'
+                }
+            });
+        }
         
-        // Enhanced ecommerce tracking for contact forms
-        gtag('config', '{{ config('services.google_analytics.tracking_id') }}', {
-            custom_map: {'dimension2': 'contact_form_submission'}
+        function acceptCookies() {
+            localStorage.setItem('cookie-consent', 'accepted');
+            document.getElementById('cookie-consent').style.display = 'none';
+            loadGoogleAnalytics();
+        }
+        
+        function declineCookies() {
+            localStorage.setItem('cookie-consent', 'declined');
+            document.getElementById('cookie-consent').style.display = 'none';
+        }
+        
+        // Check if user has already made a choice
+        window.addEventListener('load', function() {
+            const consent = localStorage.getItem('cookie-consent');
+            if (consent === 'accepted') {
+                loadGoogleAnalytics();
+            } else if (consent === 'declined') {
+                // Do nothing
+            } else {
+                // Show consent banner
+                document.getElementById('cookie-consent').style.display = 'block';
+            }
         });
     </script>
     @endif
