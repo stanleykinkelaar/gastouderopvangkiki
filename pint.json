@@ -1,0 +1,13 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "simplified_null_return": true,
+        "braces": true,
+        "function_declaration": {
+            "closure_function_spacing": "one"
+        },
+        "method_argument_space": {
+            "on_multiline": "ensure_fully_multiline"
+        }
+    }
+}

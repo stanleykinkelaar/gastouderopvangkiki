@@ -1,0 +1,64 @@
+# Dependencies
+/node_modules
+/vendor
+
+# Laravel
+/.phpunit.cache
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/storage/pail
+.phpunit.result.cache
+
+# Environment files
+.env
+.env.backup
+.env.production
+.env.local
+.env.testing
+
+# IDE files
+/.fleet
+/.idea
+/.nova
+/.vscode
+/.zed
+.phpactor.json
+
+# Logs
+npm-debug.log
+yarn-error.log
+*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Authentication
+/auth.json
+Homestead.json
+Homestead.yaml
+
+# Build artifacts
+/public/css
+/public/js
+/public/mix-manifest.json
+
+# PHPStorm
+/.idea
+
+# Database
+database/database.sqlite
+
+# Claude Code
+/.claude
+
+# Laravel specific
+/storage/logs/*.log
+/storage/app/public
