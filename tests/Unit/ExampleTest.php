@@ -3,7 +3,6 @@
 /**
  * Simple example unit tests demonstrating Pest syntax
  */
-
 test('basic math operations work correctly', function () {
     expect(2 + 2)->toBe(4);
     expect(10 - 5)->toBe(5);
