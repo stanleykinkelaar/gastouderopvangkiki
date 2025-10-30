@@ -192,23 +192,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Preload critical resources
+    // Preload and inject critical resources
     function preloadCriticalResources() {
         const criticalResources = [
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
         ];
 
         criticalResources.forEach(resource => {
+            // Check if the stylesheet is already loaded
+            const existingLink = document.querySelector(`link[href="${resource}"]`);
+            if (existingLink) return;
+            
+            // Create stylesheet link instead of preload
             const link = document.createElement('link');
-            link.rel = 'preload';
-            link.as = 'style';
+            link.rel = 'stylesheet';
             link.href = resource;
+            link.crossOrigin = 'anonymous';
             document.head.appendChild(link);
         });
     }
 
-    // Performance monitoring
-    if ('PerformanceObserver' in window) {
+    // Performance monitoring (disabled in development)
+    // Uncomment below for production performance monitoring
+    /*
+    if ('PerformanceObserver' in window && window.location.hostname !== 'gastouderopvangkiki.test') {
         // Monitor Largest Contentful Paint
         const lcpObserver = new PerformanceObserver((list) => {
             const entries = list.getEntries();
@@ -238,6 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         clsObserver.observe({ entryTypes: ['layout-shift'] });
     }
+    */
 
     // Service Worker registration for caching
     if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
@@ -274,4 +282,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.service-card, .contact-item, .about-text').forEach(el => {
         animationObserver.observe(el);
     });
+
+    // No JavaScript needed for the new CSS-only carousel
 });

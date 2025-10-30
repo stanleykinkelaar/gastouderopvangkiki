@@ -1,9 +1,8 @@
 const CACHE_NAME = 'gastouderopvang-kiki-v1';
 const urlsToCache = [
     '/',
-    '/build/assets/app.css',
-    '/build/assets/app.js',
     '/manifest.json',
+    '/favicon.ico',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
     'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
 ];

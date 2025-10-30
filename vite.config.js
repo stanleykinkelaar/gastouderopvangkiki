@@ -14,5 +14,11 @@ export default defineConfig({
     ],
     server: {
         cors: true,
+        host: 'gastouderopvangkiki.test',
+        port: 5173,
+        hmr: {
+            host: 'gastouderopvangkiki.test',
+            port: 5173,
+        },
     },
 });

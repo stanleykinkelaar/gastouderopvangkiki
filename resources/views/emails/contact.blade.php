@@ -14,7 +14,7 @@
             padding: 20px;
         }
         .header {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
             color: white;
             padding: 20px;
             border-radius: 10px 10px 0 0;
@@ -30,14 +30,14 @@
         }
         .field strong {
             display: block;
-            color: #6366f1;
+            color: #14b8a6;
             margin-bottom: 5px;
         }
         .message-content {
             background: white;
             padding: 15px;
             border-radius: 5px;
-            border-left: 4px solid #6366f1;
+            border-left: 4px solid #14b8a6;
         }
     </style>
 </head>
