@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SitemapController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');

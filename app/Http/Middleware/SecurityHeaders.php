@@ -15,20 +15,20 @@ class SecurityHeaders
         // Content Security Policy (CSP) - Protects against XSS attacks
         // Allow Vite dev server and external resources in development
         if (config('app.env') === 'local') {
-            $viteHosts = " https://gastouderopvangkiki.test:5173 https://gastouderopvangkiki.test:5174 https://gastouderopvangkiki.test:5175 https://gastouderopvangkiki.test:5176 https://vite.gastouderopvangkiki.test:5173 https://vite.gastouderopvangkiki.test:5174 https://vite.gastouderopvangkiki.test:5175 https://vite.gastouderopvangkiki.test:5176";
-            $viteWs = " wss://gastouderopvangkiki.test:5173 wss://gastouderopvangkiki.test:5174 wss://gastouderopvangkiki.test:5175 wss://gastouderopvangkiki.test:5176 ws://gastouderopvangkiki.test:5173 ws://gastouderopvangkiki.test:5174 ws://gastouderopvangkiki.test:5175 ws://gastouderopvangkiki.test:5176";
-            
+            $viteHosts = ' https://gastouderopvangkiki.test:5173 https://gastouderopvangkiki.test:5174 https://gastouderopvangkiki.test:5175 https://gastouderopvangkiki.test:5176 https://vite.gastouderopvangkiki.test:5173 https://vite.gastouderopvangkiki.test:5174 https://vite.gastouderopvangkiki.test:5175 https://vite.gastouderopvangkiki.test:5176';
+            $viteWs = ' wss://gastouderopvangkiki.test:5173 wss://gastouderopvangkiki.test:5174 wss://gastouderopvangkiki.test:5175 wss://gastouderopvangkiki.test:5176 ws://gastouderopvangkiki.test:5173 ws://gastouderopvangkiki.test:5174 ws://gastouderopvangkiki.test:5175 ws://gastouderopvangkiki.test:5176';
+
             $csp = implode('; ', [
                 "default-src 'self'",
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com" . $viteHosts,
-                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com" . $viteHosts,
+                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com".$viteHosts,
+                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com".$viteHosts,
                 "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
                 "img-src 'self' data: https: https://picsum.photos",
-                "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net" . $viteHosts . $viteWs,
+                "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net".$viteHosts.$viteWs,
                 "frame-ancestors 'none'",
                 "base-uri 'self'",
                 "form-action 'self'",
-                "object-src 'none'"
+                "object-src 'none'",
             ]);
         } else {
             $csp = implode('; ', [
@@ -41,10 +41,10 @@ class SecurityHeaders
                 "frame-ancestors 'none'",
                 "base-uri 'self'",
                 "form-action 'self'",
-                "object-src 'none'"
+                "object-src 'none'",
             ]);
         }
-        
+
         $response->headers->set('Content-Security-Policy', $csp);
 
         // HTTP Strict Transport Security (HSTS) - Forces HTTPS
@@ -83,7 +83,7 @@ class SecurityHeaders
             'magnetometer=()',
             'gyroscope=()',
             'payment=()',
-            'usb=()'
+            'usb=()',
         ]);
         $response->headers->set('Permissions-Policy', $permissions);
 
