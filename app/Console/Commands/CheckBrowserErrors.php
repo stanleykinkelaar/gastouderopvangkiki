@@ -10,7 +10,7 @@ class CheckBrowserErrors extends Command
 
     protected $description = 'Check for common browser console errors and security issues';
 
-    public function handle()
+    public function handle(): int
     {
         $this->info('🔍 Checking for common browser console errors and security issues...');
 

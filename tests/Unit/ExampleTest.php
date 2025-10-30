@@ -34,5 +34,6 @@ test('booleans and null work correctly', function () {
 
 test('custom expectation example', function () {
     // Using the custom 'toBeOne' expectation defined in Pest.php
+    /** @phpstan-ignore method.notFound */
     expect(1)->toBeOne();
 });
