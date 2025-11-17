@@ -10,13 +10,19 @@ use RyanChandler\LaravelCloudflareTurnstile\Rules\Turnstile;
 class ContactForm extends Component
 {
     public string $name = '';
+
     public string $email = '';
+
     public string $phone = '';
+
     public string $message = '';
+
     public string $turnstileResponse = '';
 
     public bool $success = false;
+
     public string $successMessage = '';
+
     public string $errorMessage = '';
 
     protected function rules(): array
@@ -59,7 +65,7 @@ class ContactForm extends Component
             $this->reset(['name', 'email', 'phone', 'message', 'turnstileResponse']);
             $this->dispatch('turnstile-reset');
         } catch (\Exception $e) {
-            \Log::error('Contact form submission failed: ' . $e->getMessage());
+            \Log::error('Contact form submission failed: '.$e->getMessage());
             $this->errorMessage = 'Er is een fout opgetreden bij het versturen van uw bericht. Probeer het later opnieuw.';
         }
     }
