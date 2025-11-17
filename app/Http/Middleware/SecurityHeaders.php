@@ -20,11 +20,12 @@ class SecurityHeaders
 
             $csp = implode('; ', [
                 "default-src 'self'",
-                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com".$viteHosts,
+                "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://challenges.cloudflare.com".$viteHosts,
                 "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com".$viteHosts,
                 "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
                 "img-src 'self' data: https: https://picsum.photos",
                 "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net".$viteHosts.$viteWs,
+                "frame-src https://challenges.cloudflare.com",
                 "frame-ancestors 'none'",
                 "base-uri 'self'",
                 "form-action 'self'",
@@ -33,11 +34,12 @@ class SecurityHeaders
         } else {
             $csp = implode('; ', [
                 "default-src 'self'",
-                "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
+                "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://challenges.cloudflare.com",
                 "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
                 "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
                 "img-src 'self' data: https: https://picsum.photos",
                 "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net",
+                "frame-src https://challenges.cloudflare.com",
                 "frame-ancestors 'none'",
                 "base-uri 'self'",
                 "form-action 'self'",

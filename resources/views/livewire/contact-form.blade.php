@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-            <x-turnstile wire:model="turnstileResponse" />
+            <x-turnstile wire:model="turnstileResponse" data-theme="light" />
             @error('turnstileResponse')
                 <div class="error-message">{{ $message }}</div>
             @enderror
