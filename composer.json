@@ -13,9 +13,11 @@
         "butschster/meta-tags": "^3.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "lettermint/lettermint-laravel": "^1.4",
         "livewire/flux": "^2.0",
         "livewire/volt": "^1.7.0",
         "resend/resend-laravel": "^0.21.0",
+        "ryangjchandler/laravel-cloudflare-turnstile": "^3.0",
         "spatie/laravel-sitemap": "^7.3"
     },
     "require-dev": {

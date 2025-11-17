@@ -63,6 +63,11 @@
     <!-- CSS -->
     @vite(['resources/css/app.css'])
 
+    <!-- Cloudflare Turnstile -->
+    <x-turnstile.scripts />
+
+    @livewireStyles
+
     @stack('styles')
 </head>
 <body>
@@ -202,6 +207,7 @@
     @endif
 
     @vite('resources/js/app.js')
+    @livewireScripts
     @stack('scripts')
 </body>
 </html>

@@ -2,42 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactFormRequest;
+use App\Mail\ContactFormMail;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Resend\Laravel\Facades\Resend;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    public function store(Request $request): JsonResponse
+    public function store(ContactFormRequest $request): JsonResponse
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:20',
-            'message' => 'required|string|max:2000',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
         try {
-            // Send email using Resend
-            Resend::emails()->send([
-                'from' => config('mail.from.address'),
-                'to' => 'info@gastouderopvangkiki.nl',
-                'subject' => 'Nieuw contactformulier bericht van '.$request->name,
-                'html' => view('emails.contact', [
-                    'contactName' => $request->name,
-                    'contactEmail' => $request->email,
-                    'contactPhone' => $request->phone,
-                    'contactMessage' => $request->message,
-                ])->render(),
-            ]);
+            Mail::to('info@gastouderopvangkiki.nl')
+                ->send(new ContactFormMail(
+                    $request->name,
+                    $request->email,
+                    $request->phone,
+                    $request->message
+                ));
 
             return response()->json([
                 'success' => true,

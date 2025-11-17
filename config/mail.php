@@ -37,6 +37,10 @@ return [
 
     'mailers' => [
 
+        'lettermint' => [
+            'transport' => 'lettermint',
+        ],
+
         'smtp' => [
             'transport' => 'smtp',
             'scheme' => env('MAIL_SCHEME'),
