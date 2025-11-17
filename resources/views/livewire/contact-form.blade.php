@@ -1,5 +1,6 @@
 <div>
     <form wire:submit="send" class="contact-form" aria-labelledby="contact-form-title">
+        @csrf
         <h3 id="contact-form-title">Stuur een bericht</h3>
         <p>Vertel me gerust waar ik u mee kan helpen - ik beantwoord uw bericht zo snel mogelijk!</p>
 
